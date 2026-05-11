@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Biodata Mahasiswa</title>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body class="halaman-materi">
+        <div id="sidebar-container"></div>
+        <div class="materi-container" style="max-width: 800px;">
+            <h2>Edit Biodata Mahasiswa</h2>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+                <div style="flex: 1; min-width: 300px;">
+                    <label>Foto Profil:</label>
+                    <input type="file" id="inputFoto" accept="image/*" class="custom-file-input" onchange="previewImage()" style="background: rgba(255,255,255,0.1);">
+
+                    <label>Nama Lengkap:</label>
+                    <input type="text" id="InputNama" placeholder="Masukkan Nama" class="custom-file-input" style="background: rgba(255,255,255,0.1);">
+
+                    <label>NIM:</label>
+                    <input type="text" id="InputNIM" placeholder="Masukkan NIM" class="custom-file-input" style="background: rgba(255,255,255,0.1);">
+
+                    <label>Kelas & Semester:</label>
+                    <input type="text" id="InputKelas" placeholder="Contoh: TI 2A - Semester 2" class="custom-file-input" style="background: rgba(255,255,255,0.1);">
+
+                    <label>Keterangan:</label>
+                    <textarea id="InputKet" placeholder="Tentang saya..." class="custom-file-input" style="height: 80px; background: rgba(255,255,255,0.1);"></textarea>
+
+                    <button onclick="updateBiodata()" class="btn-kembali" style="background: #28a745; border: none; width: 100%;">Perbarui Data</button>
+                 </div>
+
+                 <div id="KartuBiodata" style="float: 1; min-width: 300px; border: 2px solid #ffffff; padding: 20px; border-radius: 15px; text-align: center; background: rgba(0,0,0,0.1);">
+                    <img id="fotoTampil" src="../img/ppkosong.jpg" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid orange;">
+                    <h3 id="namaTampil" style="color: white;">Nama Mahasiswa</h3>
+                    <p><strong id="nimTampil">NIM</strong></p>
+                    <p id="kelasTampil">Kelas / Semester</p>
+                    <hr>
+                    <p id="ketTampil" style="font-style: italic; color: #ffffff;">Keterangan mahasiswa akan muncul disini.</p>
+                 </div>
+            </div>
+
+            <br>
+            <a href="../index.html" class="btn-kembali">Kembali ke Menu Utama</a>
+        </div>
+
+        <script>
+
+        function previewImage() {
+        const input = document.getElementById('inputFoto');
+        const fotoProfile = document.getElementById('fotoTampil');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                fotoProfile.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    function updateBiodata() {
+        const nama = document.getElementById('InputNama').value;
+        const nim = document.getElementById('InputNIM').value;
+        const kelas = document.getElementById('InputKelas').value;
+        const ket = document.getElementById('InputKet').value;
+
+        if(nama) document.getElementById('namaTampil').innerText = nama;
+        if(nim) document.getElementById('nimTampil').innerText = nim;
+        if(kelas) document.getElementById('kelasTampil').innerText = kelas;
+        if(ket) document.getElementById('InputKet').innerText = ket;
+
+        alert("Biodata Berhasil diperbarui!");
+
+
+    }
+            /*function previewImage() {
+                const file = document.getElementById('inputFoto').file[0];
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    document.getElementById('fotoTampil').src = reader.result;
+                }
+                if (file) { reader.readAsDataURL(file); }
+            }
+
+            function updateBiodata() {
+                document.getElementById('namaTampil').innerText = document.getElementById('InputNama').value || "Nama Mahasiswa";
+                document.getElementById('nimTampil').innerText = document.getElementById('InputNIM').value || "NIM";
+                document.getElementById('kelasTampil').innerText = document.getElementById('InputKelas').value || "Kelas / Semester";
+                document.getElementById('KetTampil').innerText = `"${document.getElementById('InputKet').value || "Keterangan..."}"`;
+                alert("Biodata berhasil diperbarui!");
+            }*/
+        </script>
+    </body>
+</html>

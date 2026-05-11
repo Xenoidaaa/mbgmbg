@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Materi</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="Halaman-materi">
+    <div class="materi-container">
+        <h2>Upload Materi</h2>
+        <p>Pilih file:</p>
+
+        <div style="margin: 20px 0;">
+            <input type="file" id="fileinput" class="custom-file-input">
+        </div>
+
+        <button onclick="alert('File berhasil diunggah (Simluasi)')" class="btn-kembali" style="background: #28a745; border: none; margin-bottom: 10px;">Upload</button>
+
+        <br>
+        <a href="javascript:history.back()" class="btn-kembali">Kembali</a>
+    </div>
+
+    <script>
+        function uploadFile(namaMatkul) {
+            const fileInput = document.getElementById('fileinput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                let  storagekey = 'materi_' + namaMatkul;
+                let daftarMateri = JSON.parse(localStorage.getItem(storagekey)) || [];
+
+                daftarMateri.push ({
+                    nama: file.name,
+                    tanggal: new Date().toLocaleDateString('id-ID')
+                });
+
+                localStorage.setItem(storagekey, JSON.stringify(daftarMateri));
+                alert('Materi' + file.name + 'untuk' + namaMatkul + 'berhasil disimpan!');
+
+                window.location.href = namaMatkul + ".html";
+            
+            }
+        }
+
+                
+    </script>
+</body>
+</html>
